@@ -4,18 +4,43 @@
 
 #pragma once
 
+#include "frc2/command/CommandPtr.h"
+#include "networktables/DoubleArrayTopic.h"
+#include "networktables/DoubleTopic.h"
+#include "rmb/drive/SwerveDrive.h"
+#include "rmb/sensors/gyro.h"
 #include <frc2/command/SubsystemBase.h>
+#include "rmb/controller/LogitechGamepad.h"
 
 class DriveSubsystem : public frc2::SubsystemBase {
  public:
-  DriveSubsystem();
-
+  enum brakeMode {
+    MOTOR_BRAKE = 0, 
+    ANGLE_BRAKE
+  }; 
+  DriveSubsystem(std::shared_ptr<rmb::Gyro> gyro);
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
 
+  void driveTeleop(const rmb::LogitechGamepad &gamepad); 
+  void driveTeleop(double x , double y, double z); 
+
+  frc2::CommandPtr driveTeleopCommand(const rmb::LogitechGamepad &gamepad); 
+  frc2::CommandPtr driveTeleopCommand(double x , double y, double z); 
+
+  void brake(brakeMode mode); 
+
+  void motorStop(); 
+
+  frc2::CommandPtr reset(); 
+
  private:
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
+
+ std::unique_ptr<rmb::SwerveDrive<4>> drive; 
+ nt::DoublePublisher anglePublisher; 
+ nt::DoubleArrayPublisher targetChassisSpeedsPublisher; 
+ nt::DoubleArrayPublisher chassisSpeedsPublisher; 
+
 };

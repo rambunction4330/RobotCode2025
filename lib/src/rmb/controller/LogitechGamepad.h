@@ -1,14 +1,17 @@
 #pragma once
 
+#include "frc/event/BooleanEvent.h"
+#include "frc/event/EventLoop.h"
 #include "wpi/MathExtras.h"
-#include <frc2/command/button/CommandGenericHID.h>
+#include "frc/GenericHID.h"
+// #include <frc2/command/button/CommandGenericHID.h>
 #include <frc2/command/button/Trigger.h>
 
 #include <iostream>
 
 namespace rmb {
 
-class LogitechGamepad : public frc2::CommandGenericHID {
+class LogitechGamepad : public frc::GenericHID {
 public:
   struct Axes {
     constexpr static int leftX = 0;
@@ -38,7 +41,7 @@ public:
 
   LogitechGamepad(int channel, double deadZone = 0.0,
                   bool squareOutputs = false)
-      : frc2::CommandGenericHID(channel), deadZone(deadZone),
+      : frc::GenericHID(channel), deadZone(deadZone),
         squareOutputs(squareOutputs) {}
 
   double GetLeftX() const {
@@ -52,11 +55,11 @@ public:
 
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
-  frc2::Trigger LeftXLessThan(double threshold) const {
-    return AxisLessThan(Axes::leftX, threshold);
+  frc::BooleanEvent LeftXLessThan(double threshold) const {
+    return AxisLessThan(Axes::leftX, threshold, loop);
   }
-  frc2::Trigger LeftXGreaterThan(double threshold) const {
-    return AxisGreaterThan(Axes::leftX, threshold);
+  frc::BooleanEvent LeftXGreaterThan(double threshold) const {
+    return AxisGreaterThan(Axes::leftX, threshold, loop);
   }
 
   double GetLeftY() const {
@@ -71,11 +74,11 @@ public:
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
 
-  frc2::Trigger LeftYLessThan(double threshold) const {
-    return AxisLessThan(Axes::leftY, threshold);
+  frc::BooleanEvent LeftYLessThan(double threshold) const {
+    return AxisLessThan(Axes::leftY, threshold, loop);
   }
-  frc2::Trigger LeftYgreaterThan(double threshold) const {
-    return AxisGreaterThan(Axes::leftY, threshold);
+  frc::BooleanEvent LeftYgreaterThan(double threshold) const {
+    return AxisGreaterThan(Axes::leftY, threshold, loop);
   }
 
   bool GetLeftStickButton() const { return GetRawButton(Buttons::leftStick); }
@@ -85,7 +88,7 @@ public:
   bool GetLeftStickButtonReleased() {
     return GetRawButtonPressed(Buttons::leftStick);
   }
-  frc2::Trigger LeftStickButton() const { return Button(Buttons::leftStick); }
+  frc::BooleanEvent LeftStickButton() const { return Button(Buttons::leftStick, loop); }
 
   double GetRightX() const {
     double raw = -GetRawAxis(Axes::rightX);
@@ -99,11 +102,11 @@ public:
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
 
-  frc2::Trigger RightXLessThan(double threshold) const {
-    return AxisLessThan(Axes::rightX, threshold);
+  frc::BooleanEvent RightXLessThan(double threshold) const {
+    return AxisLessThan(Axes::rightX, threshold, loop);
   }
-  frc2::Trigger RightXgreaterThan(double threshold) const {
-    return AxisGreaterThan(Axes::rightX, threshold);
+  frc::BooleanEvent RightXgreaterThan(double threshold) const {
+    return AxisGreaterThan(Axes::rightX, threshold, loop);
   }
 
   double GetRightY() const {
@@ -118,11 +121,11 @@ public:
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
 
-  frc2::Trigger RightYLessThan(double threshold) const {
-    return AxisLessThan(Axes::rightY, threshold);
+  frc::BooleanEvent RightYLessThan(double threshold) const {
+    return AxisLessThan(Axes::rightY, threshold,loop);
   }
-  frc2::Trigger RightYGearterThan(double threshold) const {
-    return AxisGreaterThan(Axes::rightY, threshold);
+  frc::BooleanEvent RightYGearterThan(double threshold) const {
+    return AxisGreaterThan(Axes::rightY, threshold, loop);
   }
 
   bool GetRightStickButton() const { return GetRawButton(Buttons::rightStick); }
@@ -132,7 +135,7 @@ public:
   bool GetRightStickButtonReleased() {
     return GetRawButtonPressed(Buttons::rightStick);
   }
-  frc2::Trigger RightStickButton() const { return Button(Buttons::rightStick); }
+  frc::BooleanEvent RightStickButton() const { return Button(Buttons::rightStick,loop); }
 
   double GetLeftTrigger() const {
     double raw = GetRawAxis(Axes::leftTrigger);
@@ -145,11 +148,11 @@ public:
 
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
-  frc2::Trigger LeftTriggerLessThan(double threshold) const {
-    return AxisLessThan(Axes::leftTrigger, threshold);
+  frc::BooleanEvent LeftTriggerLessThan(double threshold) const {
+    return AxisLessThan(Axes::leftTrigger, threshold,loop);
   }
-  frc2::Trigger LeftTriggergreaterThan(double threshold) const {
-    return AxisGreaterThan(Axes::leftTrigger, threshold);
+  frc::BooleanEvent LeftTriggergreaterThan(double threshold) const {
+    return AxisGreaterThan(Axes::leftTrigger, threshold,loop);
   }
 
   double GetRightTrigger() const {
@@ -163,11 +166,11 @@ public:
 
     return squareOutputs ? std::copysign(raw * raw, raw) : raw;
   }
-  frc2::Trigger RightTriggerLessThan(double threshold) const {
-    return AxisLessThan(Axes::rightTrigger, threshold);
+  frc::BooleanEvent RightTriggerLessThan(double threshold) const {
+    return AxisLessThan(Axes::rightTrigger, threshold,loop);
   }
-  frc2::Trigger RightTriggerGreaterThan(double threshold) const {
-    return AxisGreaterThan(Axes::rightTrigger, threshold);
+  frc::BooleanEvent RightTriggerGreaterThan(double threshold) const {
+    return AxisGreaterThan(Axes::rightTrigger, threshold,loop);
   }
 
   bool GetLeftBumper() const { return GetRawButton(Buttons::leftBumper); }
@@ -177,7 +180,7 @@ public:
   bool GetLeftBumperReleased() {
     return GetRawButtonPressed(Buttons::leftBumper);
   }
-  frc2::Trigger LeftBumper() const { return Button(Buttons::leftBumper); }
+  frc::BooleanEvent LeftBumper() const { return Button(Buttons::leftBumper, loop); }
 
   bool GetRightBumper() const { return GetRawButton(Buttons::rightBumper); }
   bool GetRightBumperPressed() {
@@ -186,27 +189,27 @@ public:
   bool GetRightBumperReleased() {
     return GetRawButtonPressed(Buttons::rightBumper);
   }
-  frc2::Trigger RightBumper() const { return Button(Buttons::rightBumper); }
+  frc::BooleanEvent RightBumper() const { return Button(Buttons::rightBumper,loop); }
 
   bool GetX() const { return GetRawButton(Buttons::X); }
   bool GetXPressed() { return GetRawButtonPressed(Buttons::X); }
   bool GetXReleased() { return GetRawButtonReleased(Buttons::X); }
-  frc2::Trigger X() const { return Button(Buttons::X); }
+  frc::BooleanEvent X() const { return Button(Buttons::X,loop); }
 
   bool GetY() const { return GetRawButton(Buttons::Y); }
   bool GetYPressed() { return GetRawButtonPressed(Buttons::Y); }
   bool GetYReleased() { return GetRawButtonReleased(Buttons::Y); }
-  frc2::Trigger Y() const { return Button(Buttons::Y); }
+  frc::BooleanEvent Y() const { return Button(Buttons::Y,loop); }
 
   bool GetA() const { return GetRawButton(Buttons::A); }
   bool GetAPressed() { return GetRawButtonPressed(Buttons::A); }
   bool GetAReleased() { return GetRawButtonReleased(Buttons::A); }
-  frc2::Trigger A() const { return Button(Buttons::A); }
+  frc::BooleanEvent A() const { return Button(Buttons::A,loop); }
 
   bool GetB() const { return GetRawButton(Buttons::B); }
   bool GetBPressed() { return GetRawButtonPressed(Buttons::B); }
   bool GetBReleased() { return GetRawButtonReleased(Buttons::B); }
-  frc2::Trigger B() const { return Button(Buttons::B); }
+  frc::BooleanEvent B() const { return Button(Buttons::B,loop); }
 
   bool GetBackButton() const { return GetRawButton(Buttons::backButton); }
   bool GetBackButtonPressed() {
@@ -215,7 +218,7 @@ public:
   bool GetBackButtonReleased() {
     return GetRawButtonReleased(Buttons::backButton);
   }
-  frc2::Trigger BackButton() const { return Button(Buttons::backButton); }
+  frc::BooleanEvent BackButton() const { return Button(Buttons::backButton,loop); }
 
   bool GetStartButton() const { return GetRawButton(Buttons::startButton); }
   bool GetStartButtonPressed() {
@@ -224,9 +227,10 @@ public:
   bool GetStartButtonReleased() {
     return GetRawButtonReleased(Buttons::startButton);
   }
-  frc2::Trigger StartButton() const { return Button(Buttons::startButton); }
+  frc::BooleanEvent StartButton() const { return Button(Buttons::startButton,loop); }
 
 private:
+  frc::EventLoop *loop; 
   double deadZone;
   bool squareOutputs;
 };

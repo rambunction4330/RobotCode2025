@@ -228,7 +228,7 @@ units::radians_per_second_t SparkMaxPositionController::getVelocity() const {
     rev::spark::SparkRelativeEncoder *rel =
         static_cast<rev::spark::SparkRelativeEncoder *>(&sparkMax.GetEncoder());
     return units::revolutions_per_minute_t(rel->GetVelocity() / gearRatio);
-    encoder.get();
+    //encoder.get();
   }
   case EncoderType::Alternate: {
     rev::spark::SparkMaxAlternateEncoder *alt =

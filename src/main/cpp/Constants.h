@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
+#include <studica/AHRS.h>
 
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
@@ -17,5 +18,6 @@
 namespace OperatorConstants {
 
 inline constexpr int driverControllerPort = 0;
+const studica::AHRS::NavXComType gyroPort = studica::AHRS::kMXP_SPI; 
 
 }  // namespace OperatorConstants

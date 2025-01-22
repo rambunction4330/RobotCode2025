@@ -3,12 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
+#include "main/cpp/subsystems/drive/DriveSubsystem.h"
 
 #include <frc2/command/button/Trigger.h>
 #include<frc2/command/CommandPtr.h>
 
 
-RobotContainer::RobotContainer() {
+RobotContainer::RobotContainer():driveSubsystem(gyro){
   // Initialize all of your commands and subsystems here
 
   // Configure the button bindings
@@ -22,4 +23,8 @@ void RobotContainer::ConfigureBindings() {
 
 frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
   
+}
+
+void RobotContainer::setTeleopDefaults(){
+  driveSubsystem.SetDefaultCommand(driveSubsystem.driveTeleopCommand(gamepad));
 }

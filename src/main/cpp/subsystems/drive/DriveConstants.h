@@ -19,17 +19,17 @@ const rmb::TalonFXPositionControllerHelper::PIDConfig positionPIDConfig{
 const rmb::TalonFXVelocityControllerHelper::PIDConfig velocityPIDConfig{
     .p= 4.0, .i=0.0, .d=0.0, .ff=0.0, .kV=0.0};
 const rmb::TalonFXVelocityControllerHelper::PIDConfig velocityPIDConfigA{
-    .p= 4.0, .i=0.0, .d=0.0, .ff=0.0, .kV=0.0};
+    .p= 4.0, .i=0.0, .d=0.0, .ff=0.0, .kV=0.080};
 
 using rmb::TalonFXPositionControllerHelper::CANCoderConfig;
 
 // Magnet Module Offsets, Wheel Circumference, Robot Diameter, and Max Module
 // Speed
 
-const units::turn_t moduleMagnetOffset1(-0.166016 - 0.5); 
-const units::turn_t moduleMagnetOffset2(0.033691); 
-const units::turn_t moduleMagnetOffset3(-0.134766);
-const units::turn_t moduleMagnetOffset4(-0.198730 - 0.5);
+const units::turn_t moduleMagnetOffset1(-0.163330078+0.5); 
+const units::turn_t moduleMagnetOffset2(0.028564453); 
+const units::turn_t moduleMagnetOffset3(-0.13671875);
+const units::turn_t moduleMagnetOffset4(0.30737304);
 
 const units::meter_t wheelCircumference = 4_in * std::numbers::pi;
 const units::meter_t robotDimX = 1.5_ft;
@@ -68,7 +68,7 @@ const rmb::TalonFXPositionController::CreateInfo positionControllerCreateInfo1{
 // module 2
 const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo2{
     .config{.id = 20, .inverted = false, .brake = true},
-    .pidConfig = velocityPIDConfig,
+    .pidConfig = velocityPIDConfigA,
     .profileConfig = {.maxVelocity = 100_tps,
                       .minVelocity = -100_tps,
                       .maxAcceleration = 10000_tr_per_s_sq},
@@ -98,7 +98,7 @@ const rmb::TalonFXPositionController::CreateInfo positionControllerCreateInfo2{
 // module 3
 const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo3{
     .config{.id = 30, .inverted = false, .brake = true},
-    .pidConfig = velocityPIDConfig,
+    .pidConfig = velocityPIDConfigA,
     .profileConfig = {.maxVelocity = 100.0_tps,
                       .minVelocity = -100_tps,
                       .maxAcceleration = 10000_tr_per_s_sq},

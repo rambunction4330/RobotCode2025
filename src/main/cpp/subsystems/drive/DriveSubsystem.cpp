@@ -97,11 +97,25 @@ DriveSubsystem::DriveSubsystem(std::shared_ptr<rmb::Gyro> gyro) {
 void DriveSubsystem::driveTeleop(const rmb::LogitechGamepad &gamepad){
     units::meters_per_second_t maxSpeed = 1_mps; 
     units::turns_per_second_t maxRotation  = 1_tps;
+    // std::cout<<"yspeed controller" << gamepad.GetLeftX()<<std::endl; 
+    // std::cout<<"xspeed controller"<<gamepad.GetLeftY()<<std::endl; 
+    std::cout<<"rotation controller"<<gamepad.GetRightX()<<std::endl; 
     units::meters_per_second_t xSpeed = -maxSpeed*gamepad.GetLeftY(); 
     units::meters_per_second_t ySpeed = maxSpeed*gamepad.GetLeftX(); 
+    units::turns_per_second_t rotation = maxRotation*gamepad.GetRightX(); 
+
+    if(std::abs(gamepad.GetLeftX())<0.05){
+        ySpeed = 0_mps; 
+    }
+    if(std::abs(gamepad.GetLeftY())<0.05){
+        xSpeed = 0_mps; 
+    }
+    if(std::abs(gamepad.GetRightX())<0.05){
+        rotation = 0_tps; 
+    }
     drive -> driveCartesian(xSpeed,
                             ySpeed, 
-                            maxRotation * gamepad.GetRightX(), 
+                            rotation, 
                             true); 
 }
 

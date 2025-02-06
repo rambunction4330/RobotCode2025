@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "units/base.h"
 #include <memory>
 
 #include <units/angle.h>
@@ -27,6 +28,7 @@ public:
    */
 
   virtual void setPosition(units::radian_t position) = 0;
+
 
   /**
    * Common interface for getting the <b>target</b> angular position.

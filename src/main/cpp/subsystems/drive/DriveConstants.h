@@ -58,7 +58,7 @@ const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo1{
         },
     .openLoopConfig = {},
     .currentLimits = {},
-    .canCoderConfig{
+    .canCoderConfig = CANCoderConfig{
         .id = 10, .useIntegrated = false, .magnetOffset = moduleMagnetOffset1}};
 
 // module 2
@@ -87,7 +87,7 @@ const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo2{
         },
     .openLoopConfig = {},
     .currentLimits = {},
-    .canCoderConfig{
+    .canCoderConfig = CANCoderConfig{
         .id = 20, .useIntegrated = false, .magnetOffset = moduleMagnetOffset2},
 };
 
@@ -118,7 +118,7 @@ const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo3{
         },
     .openLoopConfig = {},
     .currentLimits = {},
-    .canCoderConfig{
+    .canCoderConfig = CANCoderConfig{
         .id = 30, .useIntegrated = false, .magnetOffset = moduleMagnetOffset3},
 };
 
@@ -148,7 +148,7 @@ const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo4{
         },
     .openLoopConfig = {},
     .currentLimits = {},
-    .canCoderConfig{
+    .canCoderConfig = CANCoderConfig{
         .id = 40, .useIntegrated = false, .magnetOffset = moduleMagnetOffset4},
 };
 

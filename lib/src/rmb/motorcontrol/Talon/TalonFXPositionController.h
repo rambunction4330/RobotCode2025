@@ -169,7 +169,9 @@ public:
    * Sets a closed loop position setpoint on the TalonFX to the given position
    * @param position The position setpoint
    */
-  void setPosition(units::radian_t position) override;
+  void setPosition(units::radian_t position) override; 
+
+  void setPosition(units::radian_t position, units::dimensionless::scalar_t ff);
 
   /**
    * Sets open loop power on the motor

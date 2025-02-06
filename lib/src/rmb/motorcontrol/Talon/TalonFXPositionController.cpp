@@ -7,6 +7,7 @@
 #include "frc2/command/CommandScheduler.h"
 #include "units/angle.h"
 #include "units/angular_velocity.h"
+#include "units/base.h"
 
 #include <iostream>
 
@@ -125,13 +126,15 @@ TalonFXPositionController::TalonFXPositionController(
   }
 }
 
-void TalonFXPositionController::setPosition(units::radian_t position) {
+void TalonFXPositionController::setPosition(units::radian_t position, units::dimensionless::scalar_t ff) {
   units::radian_t targetPosition(position);
 
   targetPosition =
       std::clamp(targetPosition, range.minPosition, range.maxPosition);
 
   ctre::phoenix6::controls::PositionDutyCycle request(targetPosition);
+
+  request.WithFeedForward(ff);
 
   motorcontroller.SetControl(request);
 }

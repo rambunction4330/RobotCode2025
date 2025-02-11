@@ -171,7 +171,7 @@ public:
    */
   void setPosition(units::radian_t position) override; 
 
-  void setPosition(units::radian_t position, units::dimensionless::scalar_t ff);
+  // void setPosition(units::radian_t position, units::dimensionless::scalar_t ff);
 
   /**
    * Sets open loop power on the motor

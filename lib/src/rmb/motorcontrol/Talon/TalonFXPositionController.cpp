@@ -126,15 +126,13 @@ TalonFXPositionController::TalonFXPositionController(
   }
 }
 
-void TalonFXPositionController::setPosition(units::radian_t position, units::dimensionless::scalar_t ff) {
+void TalonFXPositionController::setPosition(units::radian_t position) {
   units::radian_t targetPosition(position);
 
   targetPosition =
       std::clamp(targetPosition, range.minPosition, range.maxPosition);
 
   ctre::phoenix6::controls::PositionDutyCycle request(targetPosition);
-
-  request.WithFeedForward(ff);
 
   motorcontroller.SetControl(request);
 }

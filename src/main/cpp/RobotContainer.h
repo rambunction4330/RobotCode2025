@@ -8,7 +8,11 @@
 #include <frc2/command/button/CommandXboxController.h>
 
 #include "Constants.h"
+#include "main/cpp/subsystems/drive/DriveSubsystem.h"
+#include "rmb/controller/LogitechGamepad.h"
+#include "rmb/sensors/AHRS/AHRSGyro.h"
 #include "subsystems/ExampleSubsystem.h"
+#include <memory>
 #include <rev/SparkMax.h>
 //#include <frc/Joystick.h>
 
@@ -26,11 +30,15 @@ class RobotContainer {
   frc2::CommandPtr GetAutonomousCommand();
   frc2::CommandPtr runMotorCommand(); 
 
+  void setTeleopDefaults(); 
+
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  frc2::CommandXboxController m_driverController{
+  rmb::LogitechGamepad gamepad{
       OperatorConstants::driverControllerPort};
+  std::shared_ptr<rmb::NavXGyro::Gyro> gyro = std::make_shared<rmb::NavXGyro>(OperatorConstants::gyroPort);
+  DriveSubsystem driveSubsystem; 
 
   // The robot's subsystems are defined here...
   ExampleSubsystem m_subsystem;

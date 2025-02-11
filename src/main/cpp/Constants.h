@@ -14,8 +14,11 @@
  * they are needed.
  */
 
+#include "studica/AHRS.h"
 namespace OperatorConstants {
 
 inline constexpr int driverControllerPort = 0;
+
+const studica::AHRS::NavXComType gyroPort = studica::AHRS::kMXP_SPI; 
 
 }  // namespace OperatorConstants

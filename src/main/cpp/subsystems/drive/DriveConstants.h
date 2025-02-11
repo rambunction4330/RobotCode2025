@@ -15,17 +15,17 @@ using rmb::TalonFXPositionControllerHelper::CANCoderConfig;
 
 // PID Configs:
 const rmb::TalonFXPositionControllerHelper::PIDConfig positionPIDConfig{
-    .p = 0.0, .i=0.0, .d=0.0, .ff=0.0};
+    .p = 0.0, .i=0.0, .d=0.0, .ff=1.0};
 const rmb::TalonFXVelocityControllerHelper::PIDConfig velocityPIDConfig{
     .p=0.0, .i=0.0, .d=0.0, .ff=0.0, .kV=0.0};
 
 // Magnet Module Offsets, Wheel Circumference, Robot Diameter, and Max Module
 // Speed
 
-const units::turn_t moduleMagnetOffset1 = 0.0_tr;
-const units::turn_t moduleMagnetOffset2 = 0.0_tr;
-const units::turn_t moduleMagnetOffset3 = 0.0_tr;
-const units::turn_t moduleMagnetOffset4 = 0.0_tr;
+const units::turn_t moduleMagnetOffset1(-0.4714355468);
+const units::turn_t moduleMagnetOffset2(-0.0634765625);
+const units::turn_t moduleMagnetOffset3(-0.0905761719);
+const units::turn_t moduleMagnetOffset4(-0.0190429687);
 
 const units::meter_t wheelCircumference = 4_in * std::numbers::pi;
 const units::meter_t robotDimX = 2.5_ft;

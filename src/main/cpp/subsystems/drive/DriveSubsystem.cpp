@@ -62,10 +62,10 @@ DriveSubsystem::DriveSubsystem(std::shared_ptr<rmb::Gyro> gyro) {
 
       rmb::SwerveModule(
           rmb::asLinear(std::make_unique<rmb::TalonFXVelocityController>(
-                            constants::drive::velocityControllerCreateInfo2),
+                            constants::drive::velocityControllerCreateInfo4),
                         constants::drive::wheelCircumference / 1_tr),
           std::make_unique<rmb::TalonFXPositionController>(
-              constants::drive::positionConstrollerCreateInfo2),
+              constants::drive::positionConstrollerCreateInfo4),
           frc::Translation2d(-constants::drive::robotDimX / 2,
                              -constants::drive::robotDimY),
           true)

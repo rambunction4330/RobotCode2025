@@ -43,7 +43,7 @@ SparkMaxPositionController::SparkMaxPositionController(
   sparkConfig.closedLoop.VelocityFF(createInfo.pidConfig.ff);
   sparkConfig.closedLoop.IZone(createInfo.pidConfig.iZone);
   sparkConfig.closedLoop.IMaxAccum(createInfo.pidConfig.iMaxAccumulator);
-  sparkConfig.closedLoop.OutputRange(createInfo.pidConfig.maxOutput,
+  sparkConfig.closedLoop.OutputRange(createInfo.pidConfig.minOutput,
                                      createInfo.pidConfig.maxOutput);
 
   // Range

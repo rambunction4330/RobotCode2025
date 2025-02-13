@@ -15,9 +15,9 @@ using rmb::TalonFXPositionControllerHelper::CANCoderConfig;
 
 // PID Configs:
 const rmb::TalonFXPositionControllerHelper::PIDConfig positionPIDConfig{
-    .p = 0.0, .i=0.0, .d=0.0, .ff=1.0};
+    .p = .21, .i=0.0, .d=0.12, .ff=0.0};
 const rmb::TalonFXVelocityControllerHelper::PIDConfig velocityPIDConfig{
-    .p=0.0, .i=0.0, .d=0.0, .ff=0.0, .kV=0.0};
+    .p= 1, .i=0.0, .d=0.1, .ff=0.0, .kV=0.0};
 
 // Magnet Module Offsets, Wheel Circumference, Robot Diameter, and Max Module
 // Speed

@@ -9,6 +9,7 @@
 #include "units/angular_velocity.h"
 #include "units/base.h"
 
+#include <cmath>
 #include <iostream>
 
 namespace rmb {
@@ -85,7 +86,7 @@ TalonFXPositionController::TalonFXPositionController(
             ctre::phoenix6::signals::SensorDirectionValue::
                 CounterClockwise_Positive);
     canCoderConfig.MagnetSensor.AbsoluteSensorDiscontinuityPoint =
-       0.5_tr;
+       0.0_tr;
 
     canCoderConfig.MagnetSensor.MagnetOffset =
        createInfo.canCoderConfig.value().magnetOffset;
@@ -135,6 +136,8 @@ void TalonFXPositionController::setPosition(units::radian_t position) {
   ctre::phoenix6::controls::PositionDutyCycle request(targetPosition);
 
   motorcontroller.SetControl(request);
+
+  std::cout <<(double)(units::turn_t)targetPosition<< std::endl; 
 }
 
 ctre::phoenix6::StatusSignal<double> &
@@ -263,15 +266,19 @@ TalonFXPositionController::getPositionStatusSignal() const {
 
 units::radian_t TalonFXPositionController::getPosition() const {
   auto signal = getPositionStatusSignal();
-
+  
   signal.Refresh();
+  double value = (double)(units::turn_t)signal.GetValue(); 
+ 
+  return(units::turn_t) fmod(value, 1.0);
 
-  return signal.GetValue();
 }
 
 void TalonFXPositionController::setEncoderPosition(units::radian_t position) {
   if (usingCANCoder) {
     canCoder->SetPosition(position);
+
+
   } else {
     motorcontroller.SetPosition(position);
   }

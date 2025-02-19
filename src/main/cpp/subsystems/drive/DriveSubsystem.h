@@ -5,10 +5,13 @@
 #pragma once
 
 #include "frc2/command/CommandPtr.h"
+#include "main/cpp/subsystems/drive/DriveConstants.h"
 #include "rmb/drive/SwerveDrive.h"
+#include "rmb/motorcontrol/Talon/TalonFXPositionController.h"
 #include "rmb/sensors/gyro.h"
 #include "rmb/controller/LogitechGamepad.h"
 #include <frc2/command/SubsystemBase.h>
+#include "DriveConstants.h"
 #include <memory>
 
 class DriveSubsystem : public frc2::SubsystemBase {
@@ -26,12 +29,19 @@ class DriveSubsystem : public frc2::SubsystemBase {
   frc2::CommandPtr driveTeleopCommand(const rmb::LogitechGamepad &gamepad); 
   frc2::CommandPtr driveTeleopCommand(double x , double y, double z); 
 
+  void setModules(); 
+  
+
   void motorStop(); 
 
   frc2::CommandPtr reset(); 
+  
+  void resetCanCoder(); 
 
  private:
  std::unique_ptr<rmb::SwerveDrive<4>> drive; 
+
+ //rmb::TalonFXPositionController positionController1;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

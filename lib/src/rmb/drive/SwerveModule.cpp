@@ -41,7 +41,8 @@ void SwerveModule::setState(const units::meters_per_second_t &velocity,
 
 void SwerveModule::setState(const frc::SwerveModuleState &state) {
   // units::millisecond_t start = frc::Timer::GetFPGATimestamp();
-  auto optomized = frc::SwerveModuleState::Optimize(state, getState().angle);
+  
+  // auto optomized = frc::SwerveModuleState::Optimize(state, getState().angle);
   // std::cout << "optimize time: "
   //           << ((units::millisecond_t)frc::Timer::GetFPGATimestamp() -
   //           start)()
@@ -49,9 +50,10 @@ void SwerveModule::setState(const frc::SwerveModuleState &state) {
   if (false && units::math::abs(state.speed) <= 0.05_mps) {
     velocityController->setPower(0.0);
   } else {
-    velocityController->setVelocity(optomized.speed);
+    velocityController->setVelocity(state.speed);
   }
-  angularController->setPosition(optomized.angle.Radians());
+  angularController->setPosition(state.angle.Radians());
+  
 }
 
 void SwerveModule::smartdashboardDisplayTargetState(

@@ -90,17 +90,11 @@ void DriveSubsystem::driveTeleop(const rmb::LogitechGamepad &gamepad) {
   units::meters_per_second_t maxSpeed = 1_mps;
   units::turns_per_second_t maxRotation = 1_tps;
 
-  units::meters_per_second_t xSpeed = (std::abs(gamepad.GetLeftY()) < 0.05)
-                                          ? 0_mps
-                                          : -maxSpeed * gamepad.GetLeftY();
-  units::meters_per_second_t ySpeed = (std::abs(gamepad.GetLeftX()) < 0.05)
-                                          ? 0_mps
-                                          : maxSpeed * gamepad.GetLeftX();
-  units::turns_per_second_t rot = (std::abs(gamepad.GetRightX()) < 0.05)
-                                      ? 0_tps
-                                      : maxRotation * gamepad.GetRightX();
+  units::meters_per_second_t xSpeed =  -maxSpeed * gamepad.GetLeftY();
+  units::meters_per_second_t ySpeed = maxSpeed * gamepad.GetLeftX();
+  units::turns_per_second_t rot =  maxRotation * gamepad.GetRightX();
 
-  drive->driveCartesian(xSpeed, ySpeed, rot, true);
+  drive->driveCartesian(xSpeed, ySpeed, rot, false);
 }
 
 void DriveSubsystem::driveTeleop(double x, double y, double z) {
@@ -129,6 +123,10 @@ frc2::CommandPtr DriveSubsystem::driveTeleopCommand(double x, double y,
 
 frc2::CommandPtr DriveSubsystem::reset(){
     return frc2::InstantCommand([this](){drive->resetPose(); }, {this}).ToPtr(); 
+}
+
+
+void DriveSubsystem::setModules(){
 }
 // This method will be called once per scheduler run
 void DriveSubsystem::Periodic() {

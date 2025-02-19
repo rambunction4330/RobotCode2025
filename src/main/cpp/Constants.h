@@ -15,9 +15,12 @@
  */
 
 #include "studica/AHRS.h"
+#include "units/time.h"
 namespace OperatorConstants {
 
 inline constexpr int driverControllerPort = 0;
+
+const units::millisecond_t loop = 50_ms; 
 
 const studica::AHRS::NavXComType gyroPort = studica::AHRS::kMXP_SPI; 
 

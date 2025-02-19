@@ -15,17 +15,17 @@ using rmb::TalonFXPositionControllerHelper::CANCoderConfig;
 
 // PID Configs:
 const rmb::TalonFXPositionControllerHelper::PIDConfig positionPIDConfig{
-    .p = .21, .i=0.0, .d=0.12, .ff=0.0};
+    .p = 0.1, .i=0.000, .d=0.01, .ff=0.0};
 const rmb::TalonFXVelocityControllerHelper::PIDConfig velocityPIDConfig{
-    .p= 1, .i=0.0, .d=0.1, .ff=0.0, .kV=0.0};
+    .p= 0.1, .i=0.0, .d=0.0, .ff=0.0, .kV=0.0};
 
 // Magnet Module Offsets, Wheel Circumference, Robot Diameter, and Max Module
 // Speed
 
-const units::turn_t moduleMagnetOffset1(-0.4714355468);
-const units::turn_t moduleMagnetOffset2(-0.0634765625);
-const units::turn_t moduleMagnetOffset3(-0.0905761719);
-const units::turn_t moduleMagnetOffset4(-0.0190429687);
+const units::turn_t moduleMagnetOffset1( 0.4992673);
+const units::turn_t moduleMagnetOffset2(0.44824218);
+const units::turn_t moduleMagnetOffset3(0.40502929);
+const units::turn_t moduleMagnetOffset4(0.479003906);
 
 const units::meter_t wheelCircumference = 4_in * std::numbers::pi;
 const units::meter_t robotDimX = 2.5_ft;
@@ -34,7 +34,7 @@ const units::meters_per_second_t maxModuleSpeed = 1_mps;
 
 // module 1
 const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo1{
-    .config{.id = 11, .inverted = false, .brake = true},
+    .config{.id = 12, .inverted = false, .brake = true},
     .pidConfig = velocityPIDConfig,
     .profileConfig = {.maxVelocity = 100.0_tps,
                       .minVelocity = -100_tps,
@@ -45,7 +45,7 @@ const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo1{
     .canCoderConfig = std::nullopt};
 
 const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo1{
-    .config{.id = 12, .inverted = false, .brake = true},
+    .config{.id = 11, .inverted = false, .brake = true},
     .pidConfig = positionPIDConfig,
     .range{.minPosition =
                -(units::radian_t)std::numeric_limits<double>::infinity(),
@@ -124,7 +124,7 @@ const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo3{
 
 // module 4
 const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo4{
-    .config{.id = 41, .inverted = false, .brake = true},
+    .config{.id = 42, .inverted = false, .brake = true},
     .pidConfig = velocityPIDConfig,
     .profileConfig = {.maxVelocity = 100.0_tps,
                       .minVelocity = -100_tps,
@@ -135,7 +135,7 @@ const rmb::TalonFXVelocityController::CreateInfo velocityControllerCreateInfo4{
     .canCoderConfig = std::nullopt};
 
 const rmb::TalonFXPositionController::CreateInfo positionConstrollerCreateInfo4{
-    .config{.id = 42, .inverted = false, .brake = true},
+    .config{.id = 41, .inverted = false, .brake = true},
     .pidConfig = positionPIDConfig,
     .range{.minPosition =
                -(units::radian_t)std::numeric_limits<double>::infinity(),

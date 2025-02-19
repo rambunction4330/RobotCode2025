@@ -14,6 +14,7 @@
 
 class Robot : public frc::TimedRobot {
  public:
+ Robot(): frc::TimedRobot(OperatorConstants::loop){}
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;

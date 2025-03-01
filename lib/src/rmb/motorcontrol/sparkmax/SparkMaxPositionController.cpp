@@ -76,28 +76,28 @@ SparkMaxPositionController::SparkMaxPositionController(
   case EncoderType::HallSensor:
     encoder = std::make_unique<rev::spark::ClosedLoopConfig::FeedbackSensor>(
         sparkConfig.closedLoop.kPrimaryEncoder);
-    sparkConfig.encoder.CountsPerRevolution(
-        createInfo.feedbackConfig.countPerRev);
+    // sparkConfig.encoder.CountsPerRevolution(
+    //     createInfo.feedbackConfig.countPerRev);
     break;
   case EncoderType::Quadrature:
     encoder = std::make_unique<rev::spark::ClosedLoopConfig::FeedbackSensor>(
         sparkConfig.closedLoop.kPrimaryEncoder);
 
-    sparkConfig.encoder.CountsPerRevolution(
-        createInfo.feedbackConfig.countPerRev);
+    // sparkConfig.encoder.CountsPerRevolution(
+    //     createInfo.feedbackConfig.countPerRev);
     break;
   case EncoderType::Alternate:
     encoder = std::make_unique<rev::spark::ClosedLoopConfig::FeedbackSensor>(
         sparkConfig.closedLoop.kAlternateOrExternalEncoder);
-    sparkConfig.encoder.CountsPerRevolution(
-        createInfo.feedbackConfig.countPerRev);
+    // sparkConfig.encoder.CountsPerRevolution(
+    //     createInfo.feedbackConfig.countPerRev);
     break;
 
   case EncoderType::Absolute:
     encoder = std::make_unique<rev::spark::ClosedLoopConfig::FeedbackSensor>(
         sparkConfig.closedLoop.kAbsoluteEncoder);
-    sparkConfig.encoder.CountsPerRevolution(
-        createInfo.feedbackConfig.countPerRev);
+    // sparkConfig.encoder.CountsPerRevolution(
+    //     createInfo.feedbackConfig.countPerRev);
     break;
   }
 

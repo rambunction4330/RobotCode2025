@@ -96,7 +96,7 @@ struct OpenLoopConfig {
 };
 
 struct PIDConfig {
-  double p = 0.0, i = 0.0, d = 0.0, ff = 0.0;
+  double p = 0.0, i = 0.0, d = 0.0, ff = 0.0, kG=0.0; 
   // units::turn_t tolerance = 0.0_rad; /*< Can't find a way to implement in the
   // new Pheonix V6 API*/ double closedLoopMaxPercentOutput = 1.0; /*< Can't
   // find a way to implement in the new Pheonix V6 API*/

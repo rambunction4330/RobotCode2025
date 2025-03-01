@@ -43,6 +43,7 @@ TalonFXPositionController::TalonFXPositionController(
   talonFXConfig.Slot0.kI = createInfo.pidConfig.i;
   talonFXConfig.Slot0.kD = createInfo.pidConfig.d;
   talonFXConfig.Slot0.kS = createInfo.pidConfig.ff;
+  talonFXConfig.Slot0.kG = createInfo.pidConfig.kG; 
   // Izone, maxAccumulator nonexistant in the v6 API "no use for them, so we
   // didn't implement"
 
@@ -270,7 +271,7 @@ units::radian_t TalonFXPositionController::getPosition() const {
   signal.Refresh();
   double value = (double)(units::turn_t)signal.GetValue(); 
  
-  return(units::turn_t) fmod(value, 1.0);
+  return (units::turn_t)value;
 
 }
 

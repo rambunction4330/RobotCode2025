@@ -8,10 +8,16 @@
 #include <frc2/command/button/CommandXboxController.h>
 
 #include "Constants.h"
+#include "frc/XboxController.h"
+#include "frc/event/BooleanEvent.h"
+#include "frc/event/EventLoop.h"
+#include "frc2/command/button/Trigger.h"
 #include "main/cpp/subsystems/drive/DriveSubsystem.h"
+#include "main/cpp/subsystems/elevator/ElevatorSubsystem.h"
 #include "rmb/controller/LogitechGamepad.h"
 #include "rmb/sensors/AHRS/AHRSGyro.h"
 #include "subsystems/ExampleSubsystem.h"
+#include <functional>
 #include <memory>
 #include <rev/SparkMax.h>
 //#include <frc/Joystick.h>
@@ -35,13 +41,19 @@ class RobotContainer {
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  rmb::LogitechGamepad gamepad{
-      OperatorConstants::driverControllerPort};
   std::shared_ptr<rmb::NavXGyro::Gyro> gyro = std::make_shared<rmb::NavXGyro>(OperatorConstants::gyroPort);
+  
   DriveSubsystem driveSubsystem; 
+  ElevatorSubsystem elevatorSubsystem; 
 
-  // The robot's subsystems are defined here...
-  ExampleSubsystem m_subsystem;
+
+  // rmb::LogitechGamepad gamepad{
+  //     OperatorConstants::driverControllerPort};
+  frc::XboxController controller {0};
+  // rmb::LogitechGamepad elevatorGamepad{1}; 
+
+  frc::EventLoop *loop; 
+  frc2::Trigger m_trigger; 
 
   void ConfigureBindings();
 
